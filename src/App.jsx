@@ -24,12 +24,17 @@ function App() {
           <Link to="/" className="col btn bg-dark text-white mb-2 mb-md-0 mx-2">
             Home
           </Link>
-          <Link
-            to="/createpost"
-            className="col btn bg-dark text-white mb-2 mb-md-0 mx-2"
-          >
-            Create Post
-          </Link>
+          {!isAuth ? (
+            <></>
+          ) : (
+            <Link
+              to="/createpost"
+              className="col btn bg-dark text-white mb-2 mb-md-0 mx-2"
+            >
+              Create Post
+            </Link>
+          )}
+
           {!isAuth ? (
             <Link to="/login" className="col btn bg-dark text-white mx-2">
               Login
@@ -46,7 +51,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/createpost" element={<CreatePost />} />
+        <Route path="/createpost" element={<CreatePost isAuth={isAuth} />} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
       </Routes>
     </Router>
