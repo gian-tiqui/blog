@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db, auth } from "../server/database";
 import { useNavigate } from "react-router-dom";
@@ -7,18 +6,26 @@ import { useNavigate } from "react-router-dom";
 function CreatePost({ isAuth }) {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const postsCollectionRef = collection(db, "posts");
   let navigate = useNavigate();
 
   const createPost = async () => {
-    await addDoc(postsCollectionRef, {
-      title,
-      postText,
-      author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
-    });
+    if (title.trim() === "" || postText.trim() === "") {
+      setErrorMessage("Title and post content cannot be empty.");
+    } else {
+      await addDoc(postsCollectionRef, {
+        title,
+        postText,
+        author: {
+          name: auth.currentUser.displayName,
+          id: auth.currentUser.uid,
+        },
+      });
 
-    navigate("/");
+      navigate("/");
+    }
   };
 
   useEffect(() => {
@@ -31,6 +38,7 @@ function CreatePost({ isAuth }) {
     <div className="container">
       <div className="postContainer">
         <h1>Create a post</h1>
+        {errorMessage && <p className="text-danger">{errorMessage}</p>}
         <div className="inputGroups">
           <label>Title:</label>
           <input
