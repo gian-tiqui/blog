@@ -32,7 +32,7 @@ function Home({ isAuth }) {
   };
 
   return (
-    <div>
+    <div className="bg-white">
       <ul>
         {postLists.map((post) => (
           <PostCard

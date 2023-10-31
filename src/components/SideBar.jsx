@@ -37,11 +37,87 @@ function Sidebar() {
               style={{ flex: 1 }}
             >
               <li className="nav-item">
-                <Link to="/" className="nav-link align-middle px-0">
-                  <i className="fs-4 bi-house"></i>{" "}
+                <Link
+                  to="/"
+                  className="nav-link d-flex align-items-center px-0 text-white"
+                >
+                  <i className="fs-4 bi-house text-white"></i>
                   <span className="ms-1 d-none d-sm-inline">Home</span>
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link
+                  to="/"
+                  className="nav-link d-flex align-items-center px-0 text-white"
+                >
+                  <i className="fs-4 bi-search text-white"></i>
+                  <span className="ms-1 d-none d-sm-inline">Explore</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/"
+                  className="nav-link d-flex align-items-center px-0 text-white"
+                >
+                  <i className="fs-4 bi-mailbox text-white"></i>
+                  <span className="ms-1 d-none d-sm-inline">Message</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/"
+                  className="nav-link d-flex align-items-center px-0 text-white"
+                >
+                  <i className="fs-4 bi-list-task text-white"></i>
+                  <span className="ms-1 d-none d-sm-inline">List</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/"
+                  className="nav-link d-flex align-items-center px-0 text-white"
+                >
+                  <i className="fs-4 bi-bookmark text-white"></i>
+                  <span className="ms-1 d-none d-sm-inline">Bookmark</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/"
+                  className="nav-link d-flex align-items-center px-0 text-white"
+                >
+                  <i className="fs-4 bi-people-fill text-white"></i>
+                  <span className="ms-1 d-none d-sm-inline">People</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/"
+                  className="nav-link d-flex align-items-center px-0 text-white"
+                >
+                  <i className="fs-4 bi-moon-stars-fill text-white"></i>
+                  <span className="ms-1 d-none d-sm-inline">Premium</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/"
+                  className="nav-link d-flex align-items-center px-0 text-white"
+                >
+                  <i className="fs-4 bi-person-fill text-white"></i>
+                  <span className="ms-1 d-none d-sm-inline">Profile</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/"
+                  className="nav-link d-flex align-items-center px-0 text-white"
+                >
+                  <i className="fs-4 bi-three-dots text-white"></i>
+                  <span className="ms-1 d-none d-sm-inline">More</span>
+                </Link>
+              </li>
+
               {isAuth && (
                 <li>
                   <Link
@@ -115,6 +191,20 @@ function Sidebar() {
                   aria-describedby="search-icon"
                   style={{ borderRadius: "0px 20px 20px 0px" }}
                 />
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div class="card mt-3 bg-dark text-white custom-card">
+              <div class="card-body">
+                <h5 class="card-title">Subscribe to Premium</h5>
+                <p class="card-text">
+                  Subscribe to unlock new features and if eligible, receive a
+                  share of ads revenue.
+                </p>
+                <button href="#" class="btn btn-success">
+                  Subscribe
+                </button>
               </div>
             </div>
           </div>

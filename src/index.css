@@ -16,3 +16,8 @@ code {
 .light-border {
   border: solid #333333 1px;
 }
+
+.custom-card {
+  border-radius: 15px;
+  /* Adjust the value as needed */
+}
