@@ -73,7 +73,18 @@ function Sidebar() {
             </div>
           </div>
         </div>
-        <div className="col py-3 light-border">
+        <div className="col light-border">
+          <div className="row light-border pt-3">
+            <div className="col text-white d-flex justify-content-center font-weight-bold">
+              <p>For you</p>
+            </div>
+            <div className="col text-white d-flex justify-content-center font-weight-bold">
+              <p>Following</p>
+            </div>
+            <div className="col col-sm-1 text-white d-flex justify-content-center">
+              <i className="bi bi-gear"></i>{" "}
+            </div>
+          </div>
           <Routes>
             <Route path="/" element={<Home isAuth={isAuth} />} />
             <Route
@@ -86,11 +97,25 @@ function Sidebar() {
         <div className="col p-3 col-sm-3">
           <div className="row">
             <div className="col">
-              <input
-                type="text"
-                className="rounded bg-dark text-white"
-                placeholder="Search"
-              ></input>
+              <div className="input-group rounded-pill bg-dark">
+                <span
+                  className="input-group-text bg-dark border-0"
+                  style={{ borderRadius: "20px 0px 0px 20px" }}
+                >
+                  <i
+                    className="bi bi-search text-secondary"
+                    style={{ color: "gray" }}
+                  ></i>
+                </span>
+                <input
+                  type="text"
+                  className="form-control border-0 bg-dark text-secondary"
+                  placeholder="Search"
+                  aria-label="Search"
+                  aria-describedby="search-icon"
+                  style={{ borderRadius: "0px 20px 20px 0px" }}
+                />
+              </div>
             </div>
           </div>
         </div>

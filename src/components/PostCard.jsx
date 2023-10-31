@@ -2,8 +2,8 @@ import React from "react";
 
 function PostCard({ title, content, onDelete, showDeleteBtn, author, date }) {
   return (
-    <div className="container">
-      <div className="card m-1 bg-dark text-light">
+    <div>
+      <div className="card bg-black light-border text-light">
         <div className="card-header d-flex justify-content-between">
           {title}
           {showDeleteBtn && (

@@ -8,7 +8,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { auth, db } from "../server/database";
-import PostCard from "./PostCard";
+import PostCard from "../components/PostCard";
 
 function Home({ isAuth }) {
   const [postLists, setPostLists] = useState([]);
