@@ -8,6 +8,7 @@ import CreatePost from "../pages/CreatePost";
 
 import Trends from "./Trends";
 import Footer from "./Footer";
+import Recommended from "./Recommended";
 
 function Sidebar() {
   const [isAuth, setIsAuth] = useState(false);
@@ -177,7 +178,7 @@ function Sidebar() {
                               ) : (
                                 <i className="fs-4 bi-bootstrap"></i>
                               )}
-                              <span className="ms-2 d-none d-sm-inline">
+                              <span className="ms-2 d-none d-sm-inline user-display-name">
                                 {auth.currentUser.displayName}
                               </span>
                             </>
@@ -263,7 +264,7 @@ function Sidebar() {
             <Trends />
           </div>
           <div className="col">
-            <Trends />
+            <Recommended />
           </div>
           <div className="col">
             <Footer />

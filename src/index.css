@@ -28,3 +28,10 @@ code {
 .bottom-border {
   border-bottom: solid gray 1px;
 }
+
+.user-display-name {
+  max-width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
