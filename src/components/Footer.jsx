@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   const smallerText = {
-    fontSize: "11px", // Adjust the font size as needed
+    fontSize: "11px",
   };
 
   return (
