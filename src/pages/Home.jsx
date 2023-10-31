@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  getDocs,
+  orderBy,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { auth, db } from "../server/database";
 import PostCard from "./PostCard";
 
@@ -9,7 +16,8 @@ function Home({ isAuth }) {
 
   useEffect(() => {
     const getPosts = async () => {
-      const data = await getDocs(postsCollectionReference);
+      const q = query(postsCollectionReference, orderBy("date", "desc"));
+      const data = await getDocs(q);
       setPostLists(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
@@ -33,6 +41,8 @@ function Home({ isAuth }) {
             content={post.postText}
             showDeleteBtn={isAuth && post.author.id === auth.currentUser.uid}
             onDelete={() => deletePost(post.id)}
+            author={post.author.name}
+            date={post.date}
           />
         ))}
       </ul>

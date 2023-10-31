@@ -1,17 +1,25 @@
 import React from "react";
 
-function PostCard({ title, content, onDelete, showDeleteBtn }) {
+function PostCard({ title, content, onDelete, showDeleteBtn, author, date }) {
   return (
     <div className="container">
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">{title}</h5>
-          <p className="card-text">{content}</p>
+      <div className="card m-1 bg-dark text-light">
+        <div className="card-header d-flex justify-content-between">
+          {title}
           {showDeleteBtn && (
             <button onClick={onDelete} className="btn btn-danger">
-              Delete
+              x
             </button>
           )}
+        </div>
+        <div className="card-body">
+          <blockquote className="blockquote mb-0 text-white">
+            <p className="card-text">{content}</p>
+            <footer className="blockquote-footer text-white">{author}</footer>
+          </blockquote>
+        </div>
+        <div className="card-footer text-left text-white small">
+          Date Posted: {date}
         </div>
       </div>
     </div>
