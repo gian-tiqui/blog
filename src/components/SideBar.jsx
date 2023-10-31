@@ -197,8 +197,8 @@ function Sidebar() {
             </div>
           </div>
         </div>
-        <div className="col light-border">
-          <div className="row light-border pt-3">
+        <div className="col light-border" style={{ padding: 0 }}>
+          <div className="row light-border pt-3 mx-auto">
             <div className="col text-white d-flex justify-content-center font-weight-bold">
               <p>For you</p>
             </div>
@@ -208,6 +208,9 @@ function Sidebar() {
             <div className="col col-sm-1 text-white d-flex justify-content-center">
               <i className="bi bi-gear"></i>{" "}
             </div>
+          </div>
+          <div className="col">
+            <CreatePost isAuth={isAuth} />
           </div>
           <Routes>
             <Route path="/" element={<Home isAuth={isAuth} />} />

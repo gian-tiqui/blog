@@ -39,8 +39,8 @@ function CreatePost({ isAuth }) {
   });
 
   return (
-    <div className="container">
-      <div className="card m-3 bg-dark text-light">
+    <div>
+      <div className="card bg-dark text-light">
         <div className="card-header">
           <h3>Create a Post</h3>
         </div>

@@ -32,21 +32,19 @@ function Home({ isAuth }) {
   };
 
   return (
-    <div className="bg-white">
-      <ul>
-        {postLists.map((post) => (
-          <PostCard
-            key={post.id}
-            title={post.title}
-            content={post.postText}
-            showDeleteBtn={isAuth && post.author.id === auth.currentUser.uid}
-            onDelete={() => deletePost(post.id)}
-            author={post.author.name}
-            date={post.date}
-          />
-        ))}
-      </ul>
-    </div>
+    <ul style={{ margin: 0, padding: 0 }}>
+      {postLists.map((post) => (
+        <PostCard
+          key={post.id}
+          title={post.title}
+          content={post.postText}
+          showDeleteBtn={isAuth && post.author.id === auth.currentUser.uid}
+          onDelete={() => deletePost(post.id)}
+          author={post.author.name}
+          date={post.date}
+        />
+      ))}
+    </ul>
   );
 }
 

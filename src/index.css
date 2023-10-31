@@ -19,5 +19,8 @@ code {
 
 .custom-card {
   border-radius: 15px;
-  /* Adjust the value as needed */
+}
+
+.custom-card-2 {
+  border-radius: 0px;
 }
