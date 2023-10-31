@@ -1,5 +1,22 @@
 import React, { useEffect, useState } from "react";
 
+const convertToReadable = (count) => {
+  const stringNum = `${count}`;
+
+  if (stringNum.length < 4) {
+    return stringNum;
+  } else if (stringNum.length < 7) {
+    const thousands = stringNum.slice(0, -3);
+    return `${thousands}k`;
+  } else if (stringNum.length < 10) {
+    const millions = stringNum.slice(0, -6);
+    return `${millions}M`;
+  } else {
+    const billions = stringNum.slice(0, -9);
+    return `${billions}B`;
+  }
+};
+
 function Trends() {
   const [trends, setTrends] = useState([]);
 
@@ -54,7 +71,9 @@ function Trends() {
             >
               {dat.title}
             </p>
-            <p className="text-secondary fs-10 mb-0">{dat.postCount} posts</p>
+            <p className="text-secondary fs-10 mb-0">
+              {convertToReadable(dat.postCount)} posts
+            </p>
           </div>
           <i className="bi bi-three-dots text-secondary fs-16"></i>
         </div>
