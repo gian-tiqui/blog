@@ -16,7 +16,7 @@ function CreatePost({ isAuth }) {
       setErrorMessage("Title and post content cannot be empty.");
     } else {
       const currentDate = new Date();
-      const formattedDate = currentDate.toLocaleString(); // Customize the date format as needed
+      const formattedDate = currentDate.toLocaleString();
 
       await addDoc(postsCollectionRef, {
         title,
@@ -34,7 +34,7 @@ function CreatePost({ isAuth }) {
 
   useEffect(() => {
     if (!isAuth) {
-      navigate("/login");
+      navigate("/");
     }
   });
 

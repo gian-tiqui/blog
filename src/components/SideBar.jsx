@@ -1,11 +1,12 @@
-import React from "react";
-import { useState } from "react";
-import { signOut } from "firebase/auth";
-import { auth } from "../server/database";
+import React, { useState } from "react";
+import { signOut, signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../server/database";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
 import Home from "../pages/Home";
 import CreatePost from "../pages/CreatePost";
-import Login from "../pages/Login";
-import { Routes, Route, Link } from "react-router-dom";
+
+import Trends from "./Trends";
 
 function Sidebar() {
   const [isAuth, setIsAuth] = useState(false);
@@ -14,7 +15,17 @@ function Sidebar() {
     signOut(auth).then(() => {
       localStorage.clear();
       setIsAuth(false);
-      window.location.pathname = "/login";
+      window.location.pathname = "/";
+    });
+  };
+
+  let navigate = useNavigate();
+
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider).then((result) => {
+      localStorage.setItem("isAuth", true);
+      setIsAuth(true);
+      navigate("/");
     });
   };
 
@@ -117,34 +128,71 @@ function Sidebar() {
                   <span className="ms-1 d-none d-sm-inline">More</span>
                 </Link>
               </li>
-
               {isAuth && (
-                <li>
-                  <Link
-                    to="/createpost"
-                    className="nav-link px-0 align-middle"
-                    style={{ marginBottom: "auto" }}
-                  >
-                    <i className="fs-4 bi-speedometer2"></i>{" "}
-                    <span className="ms-1 d-none d-sm-inline">Post</span>
+                <div className="mt-4 text-center mb-3">
+                  <Link to="/createpost">
+                    <button className="btn btn-success rounded-pill px-auto">
+                      Post
+                    </button>
                   </Link>
-                </li>
+                </div>
               )}
             </ul>
+
             <div className="nav-bottom">
               {!isAuth ? (
-                <Link to="/login" className="nav-link px-0">
-                  <i className="fs-4 bi-table"></i>
-                  <span className="ms-1 d-none d-sm-inline">Login</span>
-                </Link>
-              ) : (
                 <button
-                  className="btn btn-dark text-white my-4"
-                  onClick={signUserOut}
+                  className="btn bg-info rounded-pill text-white my-3 px-5  d-flex align-items-center"
+                  onClick={signInWithGoogle}
                 >
-                  <i className="fs-4 bi-bootstrap"></i>
-                  <span className="ms-1 d-none d-sm-inline">Logout</span>
+                  <span
+                    className="ms-1 d-none d-sm-inline"
+                    style={{ fontWeight: "bold" }}
+                  >
+                    Login
+                  </span>
                 </button>
+              ) : (
+                <div className="bg-black">
+                  {auth.currentUser ? (
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        className="btn btn-black text-white my-4 d-flex align-items-center"
+                        variant="transparent"
+                        id="dropdown-basic"
+                      >
+                        <>
+                          {auth.currentUser ? (
+                            <>
+                              {auth.currentUser.photoURL ? (
+                                <img
+                                  src={auth.currentUser.photoURL}
+                                  alt={auth.currentUser.displayName}
+                                  className="rounded-circle user-profile-img"
+                                  style={{ width: "36px", height: "36px" }}
+                                />
+                              ) : (
+                                <i className="fs-4 bi-bootstrap"></i>
+                              )}
+                              <span className="ms-2 d-none d-sm-inline">
+                                {auth.currentUser.displayName}
+                              </span>
+                            </>
+                          ) : (
+                            "Login"
+                          )}
+                        </>
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        <Dropdown.Item onClick={signUserOut}>
+                          <span className="text-dark">Logout</span>
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  ) : (
+                    "Login"
+                  )}
+                </div>
               )}
             </div>
           </div>
@@ -167,7 +215,6 @@ function Sidebar() {
               path="/createpost"
               element={<CreatePost isAuth={isAuth} />}
             />
-            <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
           </Routes>
         </div>
         <div className="col p-3 col-sm-3">
@@ -195,18 +242,21 @@ function Sidebar() {
             </div>
           </div>
           <div className="col">
-            <div class="card mt-3 bg-dark text-white custom-card">
-              <div class="card-body">
-                <h5 class="card-title">Subscribe to Premium</h5>
-                <p class="card-text">
+            <div className="card mt-3 bg-dark text-white custom-card">
+              <div className="card-body">
+                <h5 className="card-title">Subscribe to Premium</h5>
+                <p className="card-text">
                   Subscribe to unlock new features and if eligible, receive a
                   share of ads revenue.
                 </p>
-                <button href="#" class="btn btn-success">
+                <button href="#" className="btn btn-success rounded-pill px-4">
                   Subscribe
                 </button>
               </div>
             </div>
+          </div>
+          <div className="col">
+            <Trends />
           </div>
         </div>
       </div>
