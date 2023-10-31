@@ -36,7 +36,7 @@ function Trends() {
   }, []);
 
   return (
-    <div className="card bg-dark my-3 py-2 px-3">
+    <div className="card custom-card bg-dark my-3 py-2 px-3">
       <div className="card-title text-white">
         <h4>Trends for you</h4>
       </div>

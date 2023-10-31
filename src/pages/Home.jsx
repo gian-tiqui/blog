@@ -42,6 +42,7 @@ function Home({ isAuth }) {
           onDelete={() => deletePost(post.id)}
           author={post.author.name}
           date={post.date}
+          photoURL={post.author.photo}
         />
       ))}
     </ul>

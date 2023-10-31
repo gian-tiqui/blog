@@ -4,7 +4,11 @@ import { db, auth } from "../server/database";
 import { useNavigate } from "react-router-dom";
 
 function CreatePost({ isAuth }) {
-  const [title, setTitle] = useState("");
+  const photoStyle = {
+    width: "40px",
+    height: "40px",
+  };
+
   const [postText, setPostText] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -12,18 +16,18 @@ function CreatePost({ isAuth }) {
   let navigate = useNavigate();
 
   const createPost = async () => {
-    if (title.trim() === "" || postText.trim() === "") {
+    if (postText.trim() === "") {
       setErrorMessage("Title and post content cannot be empty.");
     } else {
       const currentDate = new Date();
       const formattedDate = currentDate.toLocaleString();
 
       await addDoc(postsCollectionRef, {
-        title,
         postText,
         author: {
           name: auth.currentUser.displayName,
           id: auth.currentUser.uid,
+          photo: auth.currentUser.photoURL,
         },
         date: formattedDate,
       });
@@ -39,42 +43,41 @@ function CreatePost({ isAuth }) {
   });
 
   return (
-    <div>
-      <div className="card bg-dark text-light">
-        <div className="card-header">
-          <h3>Create a Post</h3>
-        </div>
-        <div className="card-body">
-          {errorMessage && <p className="text-danger">{errorMessage}</p>}
-          <div className="mb-3">
-            <label htmlFor="title" className="form-label text-light">
-              Title:
-            </label>
-            <input
-              type="text"
-              id="title"
-              className="form-control"
-              placeholder="Title..."
-              onChange={(event) => setTitle(event.target.value)}
+    <div className="p-3">
+      <div className="custom-card2 bg-black text-light">
+        <div className="row">
+          <div className="col col-sm-1">
+            <img
+              src={auth.currentUser.photoURL}
+              alt={auth.currentUser.displayName}
+              className="user-photo rounded-circle img-fluid"
+              style={photoStyle}
             />
           </div>
-          <div className="mb-3">
-            <label htmlFor="postText" className="form-label text-light">
-              Post:
-            </label>
-            <textarea
-              id="postText"
-              className="form-control"
-              placeholder="Post..."
-              rows="5"
-              onChange={(event) => setPostText(event.target.value)}
-            />
+          <div className="col">
+            <div>
+              {errorMessage && <p className="text-danger">{errorMessage}</p>}
+
+              <div className="bottom-border">
+                <textarea
+                  id="postText"
+                  className="form-control bg-black mb-2"
+                  placeholder="What is happening?!"
+                  rows="3"
+                  onChange={(event) => setPostText(event.target.value)}
+                  style={{ border: "none", outline: "none !important" }}
+                />
+              </div>
+            </div>
+            <div className="d-flex justify-content-end mt-3">
+              <button
+                className="btn btn-success rounded-pill px-5"
+                onClick={createPost}
+              >
+                Post
+              </button>
+            </div>
           </div>
-        </div>
-        <div className="card-footer">
-          <button className="btn btn-primary" onClick={createPost}>
-            Post
-          </button>
         </div>
       </div>
     </div>

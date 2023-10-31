@@ -24,3 +24,7 @@ code {
 .custom-card-2 {
   border-radius: 0px;
 }
+
+.bottom-border {
+  border-bottom: solid gray 1px;
+}

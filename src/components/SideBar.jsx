@@ -7,6 +7,7 @@ import Home from "../pages/Home";
 import CreatePost from "../pages/CreatePost";
 
 import Trends from "./Trends";
+import Footer from "./Footer";
 
 function Sidebar() {
   const [isAuth, setIsAuth] = useState(false);
@@ -22,11 +23,13 @@ function Sidebar() {
   let navigate = useNavigate();
 
   const signInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((result) => {
-      localStorage.setItem("isAuth", true);
-      setIsAuth(true);
-      navigate("/");
-    });
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        localStorage.setItem("isAuth", true);
+        setIsAuth(true);
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -52,7 +55,7 @@ function Sidebar() {
                   to="/"
                   className="nav-link d-flex align-items-center px-0 text-white"
                 >
-                  <i className="fs-4 bi-house text-white"></i>
+                  <i className="fs-4 bi-house-fill text-white"></i>
                   <span className="ms-1 d-none d-sm-inline">Home</span>
                 </Link>
               </li>
@@ -131,7 +134,7 @@ function Sidebar() {
               {isAuth && (
                 <div className="mt-4 text-center mb-3">
                   <Link to="/createpost">
-                    <button className="btn btn-success rounded-pill px-auto">
+                    <button className="btn btn-success rounded-pill px-5 mx-auto">
                       Post
                     </button>
                   </Link>
@@ -209,9 +212,7 @@ function Sidebar() {
               <i className="bi bi-gear"></i>{" "}
             </div>
           </div>
-          <div className="col">
-            <CreatePost isAuth={isAuth} />
-          </div>
+
           <Routes>
             <Route path="/" element={<Home isAuth={isAuth} />} />
             <Route
@@ -260,6 +261,12 @@ function Sidebar() {
           </div>
           <div className="col">
             <Trends />
+          </div>
+          <div className="col">
+            <Trends />
+          </div>
+          <div className="col">
+            <Footer />
           </div>
         </div>
       </div>
